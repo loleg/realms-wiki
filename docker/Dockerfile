@@ -14,6 +14,10 @@ RUN cd /home/deploy/realms-wiki && .venv/bin/pip install realms-wiki
 # Logging
 RUN mkdir /var/log/realms-wiki && chown deploy.deploy /var/log/realms-wiki
 
+# Postgres
+RUN apt-get install -y libpq-dev postgresql postgresql-contrib postgresql-client
+RUN cd /home/deploy/realms-wiki && .venv/bin/pip install psycopg2
+
 # Upstart
 RUN mkdir /etc/service/realms-wiki
 ADD realms-wiki.sh /etc/service/realms-wiki/run
